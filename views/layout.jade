@@ -4,4 +4,22 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    nav
+      ul
+        li
+          a(href="/") 
+            div home
+        li
+          a(href="/books")
+            div books
+        if loggedIn
+          li
+            | Logged in as: #{userName}
+          li
+            a(href="/profile") Account Settings
+        li.right
+          form(action="/search")
+            input( type="text" placeholder="Search.." name="search" )
+            button(type="submit") search
+    div#container
+      block content

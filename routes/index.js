@@ -1,9 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+function isLoggedIn(req,res,next){
+	if( req.session.user_id ){
+		res.locals.pugVars.userName = 'test'
+		next();
+	} else {
+		res.send('You must be logged in to access this page.');
+	}
+}
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', res.locals.pugVars);
+});
+router.get('/profile', isLoggedIn, function(req, res, next) {
+  res.render('profile', res.locals.pugVars);
+});
+router.get('/books', function(req, res, next) {
+  res.render('books', res.locals.pugVars);
 });
 
 router.post('/auth', function (req, res) { 

@@ -1,9 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form(action='\auth' method='post')
-    input( type='text' name='user')
-    input( type='text' name='password')
-    input( type='submit' value='submit')
+  h1 Book my life
+  p Trade books the easy way!
+  if !isLoggedIn
+    div#register
+      h3 Register
+      form(action='\auth' method='post')
+        input( type='text' name='user')
+        input( type='text' name='password')
+        input( type='submit' value='submit')
+    div#login
+      h3 Login
+      form(action='\auth' method='post')
+        input( type='text' name='user')
+        input( type='text' name='password')
+        input( type='submit' value='submit')
