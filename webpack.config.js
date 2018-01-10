@@ -14,7 +14,7 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'babel-loader!ts-loader'
+                loader: 'eslint-loader!babel-loader!ts-loader'
             },
         ]
     },

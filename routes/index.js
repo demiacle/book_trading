@@ -17,6 +17,10 @@ function queryAllBooks(req,res,next){
 	next();
 }
 
+router.get('/test', function(req, res, next) {
+  res.render('', res.locals.pugVars);
+});
+
 router.get('/', function(req, res, next) {
   res.render('index', res.locals.pugVars);
 });
