@@ -1,18 +1,29 @@
 extends layout
 
 block content
-  h1 Book my life
-  p Trade books the easy way!
-  if !isLoggedIn
-    div#register
-      h3 Register
-      form(action='\auth' method='post')
-        input( type='text' name='user')
-        input( type='text' name='password')
-        input( type='submit' value='submit')
-    div#login
-      h3 Login
-      form(action='\auth' method='post')
-        input( type='text' name='user')
-        input( type='text' name='password')
-        input( type='submit' value='submit')
+  div#indexTop
+    div#graphic
+      h1.center Book&middot;My&middot;Life
+      h2.center Trade books the easy way!
+      img#tree(src="trees_cm-.png")
+    p#builtBy
+      | built by Daniel Escobedo:@Demiacle using such and such
+  div#indexBottom
+    if !isLoggedIn
+      div#registerForm
+        h3 Register
+        form(action='\auth' method='post')
+          input( type='text' name='user' placeholder='name') 
+          input( type='text' name='password' placeholder='password')
+          input( type='submit' value='Register')
+      div#loginForm
+        h3 Login
+        form(action='\auth' method='post')
+          input( type='text' name='user' placeholder='name')
+          input( type='text' name='password' placeholder='password')
+          input( type='submit' value='Login')
+      p.sub
+        | *for demo purposes, registering any name/password will work as long as it is not already taken
+    else 
+      p
+        | Welcome backk
