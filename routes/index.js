@@ -10,13 +10,20 @@ function isLoggedIn(req,res,next){
 	}
 }
 
+function queryAllBooks(req,res,next){
+	// query all books and place in pugvars
+	res.locals.pugVars.pages = 15;
+	res.locals.pugVars.currentPage = 8;
+	next();
+}
+
 router.get('/', function(req, res, next) {
   res.render('index', res.locals.pugVars);
 });
 router.get('/profile', isLoggedIn, function(req, res, next) {
   res.render('profile', res.locals.pugVars);
 });
-router.get('/books', function(req, res, next) {
+router.get('/books', queryAllBooks, function(req, res, next) {
   res.render('books', res.locals.pugVars);
 });
 

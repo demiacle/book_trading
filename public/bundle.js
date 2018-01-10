@@ -65,14 +65,52 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __extends = this && this.__extends || function () {
+    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+        d.__proto__ = b;
+    } || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() {
+            this.constructor = d;
+        }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+}();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(1);
+var ReactDOM = __webpack_require__(2);
+var Hello = /** @class */function (_super) {
+    __extends(Hello, _super);
+    function Hello() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Hello.prototype.render = function () {
+        return React.createElement("h1", null, "Hello form ", this.props.compiler, " and ", this.props.framework);
+    };
+    return Hello;
+}(React.Component);
+ReactDOM.render(React.createElement(Hello, { compiler: "Typescript", framework: "React" }), document.getElementById("app"));
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
-function ta(person) {
-    return "hellow, " + person;
-}
-var users = "string";
-ta(users);
+module.exports = React;
 
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = ReactDOM;
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

@@ -10,6 +10,10 @@ h1, h2, h3, p {
   color: rgb(55, 55, 55);
   margin: 0;
 }
+h1, h2 {
+  text-align: center;
+  background-color: #81C784;
+}
 h1 {
   letter-spacing: -4px;
   font-size: 34pt;
@@ -75,8 +79,10 @@ width: 100%;
 margin: auto;
 }
 #indexTop{
-background-color: #81C784;
-padding: 40px 0px 18px 0;
+
+background-color: #81C784;
+
+padding: 40px 0px 18px 0;
 }
 #indexBottom div {
   display:inline-block;
@@ -143,14 +149,30 @@ form input[type="submit"] {
   display: block;
 }
 #builtBy {
-text-align: center;
-margin-top: 8px;
-font-size: 14pt;
-letter-spacing: 1px;
-color: white;
+
+text-align: center;
+
+margin-top: 8px;
+
+font-size: 14pt;
+
+letter-spacing: 1px;
+
+color: white;
+}
+#paginationContainer {
+  text-align: center;
+  padding: 12px;
 }
 
 .sub {
   font-size: 12pt;
   margin-top: 26px;
+}
+
+.pagination {
+  color: #375972;
+  margin-right: 10px;
+  font-size: 14pt;
+  text-decoration: none;
 }
