@@ -5,7 +5,7 @@ import { hydrate } from 'react-dom';
 
 hydrate(
   <BrowserRouter>
-    <App />
+    <App/>
   </BrowserRouter>,
   document.getElementById('root')
 );
