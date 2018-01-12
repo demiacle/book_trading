@@ -9,7 +9,9 @@ const server = express();
 
 function renderReactComponent(req, res){
   const context = {};
-  const serverData ={ test:'test'}
+  const serverData = { test:'test'}
+
+  // Render component to html
   const markup = renderToString(
     <StaticRouter context={context} location={req.url}>
       <App {...serverData} />
@@ -33,6 +35,9 @@ function renderReactComponent(req, res){
         ${process.env.NODE_ENV === 'production'
         ? `<script src="${assets.client.js}" defer></script>`
         : `<script src="${assets.client.js}" defer crossorigin></script>`}
+        <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(serverData).replace(/</g, '\\u003c')}
+        </script
     </head>
     <body>
         <div id="root">${markup}</div>

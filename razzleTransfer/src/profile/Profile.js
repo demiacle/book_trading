@@ -1,31 +1,20 @@
 import React, { Component } from 'react';
-import logo from '../react.svg';
 import './Profile.css';
 
 class Profile extends Component {
   render() {
-    console.log('test')
     return (
       <div className="Home">
-        <div className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" />
-          <h2>Welcome to Razzle</h2>
-        </div>
-        <p className="Home-intro">
-          To get started, edit <code>src/App.js</code> or{' '}
-          <code>src/Home.js</code> and save to reload.
-        </p>
-        <ul className="Home-resources">
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle">Docs</a>
-          </li>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle/issues">Issues</a>
-          </li>
-          <li>
-            <a href="https://palmer.chat">Community Slack</a>
-          </li>
-        </ul>
+        <h1>profile page</h1>
+        <p>allow update of the following:</p>
+        <p>first/last name</p>
+        <p>city</p>
+        <p>state</p>
+        <p>user name</p>
+        <p>password</p><br /><br /><br /><br />
+        <p>books traded</p>
+        <p>requests made BY you</p>
+        <p>requests made TO you</p>
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../react.svg';
 import './Home.css';
 
 class Home extends Component {
@@ -7,32 +6,39 @@ class Home extends Component {
     super(props)
     console.log('constructor props are ')
     console.log(props)
+    this.state = {
+      test: props.test
+    }
   }
   render() {
-    console.log( 'component has this data')
-    console.log( this.props )
-    console.log( this.state )
     return (
       <div className="Home">
-        <div className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" />
-          <h2>Welcome to HOME PAGE and props are</h2>
+        <div id="indexTop">
+          <div id="graphic">
+            <h1>Book&middot;My&middot;Life</h1>
+            <h2>Trade books the easy way!</h2><img id="tree" src="trees_cm-.png" alt="site icon" />
+          </div>
+          <p id="builtBy">built by Daniel Escobedo:@Demiacle using such and such</p>
         </div>
-        <p className="Home-intro">
-          To get started, edit <code>src/App.js</code> or{' '}
-          <code>src/Home.js</code> and save to reload.
-        </p>
-        <ul className="Home-resources">
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle">Docs</a>
-          </li>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle/issues">Issues</a>
-          </li>
-          <li>
-            <a href="https://palmer.chat">Community Slack</a>
-          </li>
-        </ul>
+        <div id="indexBottom">
+          <div id="registerForm">
+            <h3>Register</h3>
+            <form action="auth" method="post">
+              <input type="text" name="user" placeholder="name" />
+              <input type="text" name="password" placeholder="password" />
+              <input type="submit" value="Register" />
+            </form>
+          </div>
+          <div id="loginForm">
+            <h3>Login</h3>
+            <form action="auth" method="post">
+              <input type="text" name="user" placeholder="name" />
+              <input type="text" name="password" placeholder="password" />
+              <input type="submit" value="Login" />
+            </form>
+          </div>
+          <p className="sub">*for demo purposes, registering any name/password will work as long as it is not already taken</p>
+        </div>
       </div>
     );
   }

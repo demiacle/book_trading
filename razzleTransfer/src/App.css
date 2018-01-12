@@ -1,5 +1,178 @@
 body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-width: 580px;
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+}
+a {
+  color: #ffffff;
+}
+h1, h2, h3, p {
+  color: rgb(55, 55, 55);
+  margin: 0;
+}
+h1, h2 {
+  text-align: center;
+  background-color: #81C784;
+}
+h1 {
+  letter-spacing: -4px;
+  font-size: 34pt;
+  font-family: serif;
+  text-shadow: 2px 1px 1px #c6ffc8;
+}
+form {
+}
+h2 {
+
+letter-spacing: -1px;
+
+font-family: serif;
+}
+p {
+
+font-size: 18pt;
+}
+nav {font-size: 16pt;width: 100%;/* margin-bottom: 40px; */}
+nav ul {
+  position:relative;
+  padding: 0 20px;
+  margin: 0;
+  background-color: #4CAF50;
+  }
+
+nav ul li {
+  display: inline-block;
+}
+nav ul li div {
+  display: inline-block;
+  cursor: pointer;
+  padding: 12px 8px;
+}
+
+nav form input {
+  border-radius: 20px 2px 2px 20px;
+  border: 1px solid #686868;
+  padding: 6px;
+}
+nav form button {
+  cursor: pointer;
+  padding: 5px;
+  background-color: #5bc5e8;
+  /* border: 2px outset #7e96de; */
+  border-radius: 2px;
+  border-color: #30b7ff;
+}
+#graphic img {
+  margin: auto;
+  position: absolute;
+  bottom: 54px;
+  left: 0;
+  right: 0;
+}
+#title {
+
+}
+#container {
+  
+width: 100%;
+  
+margin: auto;
+}
+#indexTop{
+
+background-color: #81C784;
+
+padding: 40px 0px 18px 0;
+}
+#indexBottom div {
+  display:inline-block;
+  width: 252px;
+}
+div#indexBottom {
+  text-align: center;
+  padding: 14px;
+}
+#register {
+
+}
+#login{
+  
+}
+
+#graphic{
+    border: 1px solid white;
+    width: 358px;
+    padding: 20px;
+    height: 304px;
+    margin: auto;
+    position: relative;
+}
+
+.right{
+  position: absolute;
+  right: 18px;
+  top: 10px;
+}
+
+.center{
+  text-align: center;
+}
+
+#registerForm{
+  margin-right: 20px;
+}
+
+#registerForm input, #loginForm input {
+  display: block;
+  border: 1px solid lightgrey;
+  margin-bottom: 4px;
+}
+#registerForm h3, #loginForm h3, #registerForm input, #loginForm input {
+  text-align: center;
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+form input[type="submit"] {
+  border-radius: 20px;
+  margin-top: 9px;
+  cursor: pointer;
+  color: white;
+  background-color: #4caf50;
+  font-size: 14pt;
+  border: none;
+}
+#loginForm{
+
+}
+#loginForm input {
+  display: block;
+}
+#builtBy {
+
+text-align: center;
+
+margin-top: 8px;
+
+font-size: 14pt;
+
+letter-spacing: 1px;
+
+color: white;
+}
+#paginationContainer {
+  text-align: center;
+  padding: 12px;
+}
+
+.sub {
+  font-size: 12pt;
+  margin-top: 26px;
+}
+
+.pagination {
+  color: #375972;
+  margin-right: 10px;
+  font-size: 14pt;
+  text-decoration: none;
 }
