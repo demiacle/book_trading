@@ -99,11 +99,11 @@ server
   .use(initializeServerData)
   // Routes
   .get('/books', isLoggedIn, (req,res,next)=>{
-    // set current page query
-    res.locals.serverData.currentPage = 4;
-    // set total pages
+    var currentPage = req.query.page ? req.query.page : 1;
+    res.locals.serverData.currentPage = currentPage;
+    // Query for total Pages
     res.locals.serverData.totalPages = 22;
-    // find books within query limit
+    // find books within query limit currentPage -> currentPage+10
     res.locals.serverData.books = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
     next();
   }, renderReactComponent )

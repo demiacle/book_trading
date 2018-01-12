@@ -21,6 +21,7 @@ class Home extends Component {
           </div>
           <p id="builtBy">Built by Daniel Escobedo:<a href="https://twitter.com/Demiacle?lang=en">@Demiacle</a> using <a href="https://reactjs.org/">React</a>, <a href="https://github.com/jaredpalmer/razzle">Razzle</a>, and <a href="https://github.com/expressjs/express">Express</a></p>
         </div>
+        { this.props.isLoggedIn ? '' :
         <div id="indexBottom">
           <div id="registerForm">
             <h3>Register</h3>
@@ -41,6 +42,7 @@ class Home extends Component {
           </div>
           <p className="sub">*for demo purposes, registering any name/password will work as long as an identicle combination does not already taken</p>
         </div>
+        }
       </div>
     );
   }

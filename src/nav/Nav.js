@@ -16,11 +16,20 @@ class Nav extends Component {
               <div>books</div>
             </a>
           </li>
+          { this.props.isLoggedIn ?
+          <li>
+            <a href="/profile">
+              <div>profile</div>
+            </a>
+          </li> 
+          :''}
+          { this.props.isLoggedIn ?
           <li>
             <a href="/logout">
               <div>logout</div>
             </a>
-          </li>
+          </li> 
+          :''}
           <li className="right">
             <form action="/search">
               <input type="text" placeholder="Search.." name="search" />
