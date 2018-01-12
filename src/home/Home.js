@@ -18,26 +18,26 @@ class Home extends Component {
             <h1>Book&middot;My&middot;Life</h1>
             <h2>Trade books the easy way!</h2><img id="tree" src="trees_cm-.png" alt="site icon" />
           </div>
-          <p id="builtBy">built by Daniel Escobedo:@Demiacle using such and such</p>
+          <p id="builtBy">Built by Daniel Escobedo:<a href="https://twitter.com/Demiacle?lang=en">@Demiacle</a> using <a href="https://reactjs.org/">React</a>, <a href="https://github.com/jaredpalmer/razzle">Razzle</a>, and <a href="https://github.com/expressjs/express">Express</a></p>
         </div>
         <div id="indexBottom">
           <div id="registerForm">
             <h3>Register</h3>
-            <form action="auth" method="post">
-              <input type="text" name="user" placeholder="name" />
-              <input type="text" name="password" placeholder="password" />
+            <form action="/register" method="post">
+              <input type="text" name="user" placeholder="name" required/>
+              <input type="text" name="password" placeholder="password" required/>
               <input type="submit" value="Register" />
             </form>
           </div>
           <div id="loginForm">
             <h3>Login</h3>
-            <form action="auth" method="post">
-              <input type="text" name="user" placeholder="name" />
-              <input type="text" name="password" placeholder="password" />
+            <form action="/login" method="post">
+              <input type="text" name="user" placeholder="name" required/>
+              <input type="text" name="password" placeholder="password" required/>
               <input type="submit" value="Login" />
             </form>
           </div>
-          <p className="sub">*for demo purposes, registering any name/password will work as long as it is not already taken</p>
+          <p className="sub">*for demo purposes, registering any name/password will work as long as an identicle combination does not already taken</p>
         </div>
       </div>
     );
