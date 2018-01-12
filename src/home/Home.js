@@ -11,6 +11,7 @@ class Home extends Component {
     }
   }
   render() {
+    console.log(this.props)
     return (
       <div className="Home">
         <div id="indexTop">
@@ -29,6 +30,7 @@ class Home extends Component {
               <input type="submit" value="Register" />
             </form>
           </div>
+          { this.props.isLoggedIn}
           <div id="loginForm">
             <h3>Login</h3>
             <form action="/login" method="post">

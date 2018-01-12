@@ -15,11 +15,11 @@ var sessionData = {
   secret: 'booksGud',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }
 
 
-function renderReactComponent(req, res){
+function renderReactComponent(req, res) {
   const context = {};
   const serverData = res.locals.serverData ? res.locals.serverData : {};
   console.log('servdata')
@@ -67,6 +67,8 @@ function initializeServerData(req,res,next){
 }
 
 function isLoggedIn(req,res,next){
+  console.log('is logged in?')
+  console.log( req.session )
 	if( req.session.user_id ){
 		res.locals.serverData.isLoggedIn = true;
 	}
@@ -82,7 +84,7 @@ function requireLoggedIn(req,res,next){
 }
 
 function requireNotLoggedIn(req,res,next){
-  if( req.session.user_id){
+  if( req.session.user_id ){
     res.send('You are already logged in');
   } else {
     next();
@@ -136,6 +138,11 @@ server
     } else {
       res.send('That username/password combination does not exist, please register first!');
     }
-  });
+  })
+  .get('/logout', function(req,res) {
+    req.session.destroy(()=>{
+      res.redirect('/');
+    })
+  })
 
 export default server;

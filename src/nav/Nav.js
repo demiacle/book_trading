@@ -16,6 +16,11 @@ class Nav extends Component {
               <div>books</div>
             </a>
           </li>
+          <li>
+            <a href="/logout">
+              <div>logout</div>
+            </a>
+          </li>
           <li className="right">
             <form action="/search">
               <input type="text" placeholder="Search.." name="search" />
