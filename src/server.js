@@ -18,20 +18,17 @@ var sessionData = {
   cookie: { secure: false }
 }
 
-
 function renderReactComponent(req, res) {
   const context = {};
   const serverData = res.locals.serverData ? res.locals.serverData : {};
   console.log('servdata')
   console.log( serverData )
-
   // Render component to html
   const markup = renderToString(
     <StaticRouter context={context} location={req.url}>
       <App {...serverData} />
     </StaticRouter>
   );
-
   if (context.url) {
     res.redirect(context.url);
   } else {
@@ -65,7 +62,6 @@ function initializeServerData(req,res,next){
   res.locals.serverData = {};
   next();
 }
-
 function isLoggedIn(req,res,next){
   console.log('is logged in?')
   console.log( req.session )
@@ -74,7 +70,6 @@ function isLoggedIn(req,res,next){
 	}
   next();
 }
-
 function requireLoggedIn(req,res,next){
 	if( req.session.user_id ){
 		next();
@@ -82,7 +77,6 @@ function requireLoggedIn(req,res,next){
 		res.send('You must be logged in to access this page.');
 	}
 }
-
 function requireNotLoggedIn(req,res,next){
   if( req.session.user_id ){
     res.send('You are already logged in');
@@ -91,7 +85,7 @@ function requireNotLoggedIn(req,res,next){
   }
 }
 
-// MIDDLEWARES GO HERE
+// Middleware and routes
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
@@ -100,16 +94,28 @@ server
   // Routes
   .get('/books', isLoggedIn, (req,res,next)=>{
     var currentPage = req.query.page ? req.query.page : 1;
-    res.locals.serverData.currentPage = currentPage;
+    res.locals.serverData.currentPage = parseInt( currentPage );
     // Query for total Pages
     res.locals.serverData.totalPages = 22;
     // find books within query limit currentPage -> currentPage+10
-    res.locals.serverData.books = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
+    res.locals.serverData.books = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ]
     next();
   }, renderReactComponent )
 
   .get('/', isLoggedIn, renderReactComponent )
-  .get('/profile', requireLoggedIn, renderReactComponent )
+  .get('/profile', requireLoggedIn, (req,res,next)=>{
+    // Get all profile data
+    res.locals.serverData.profile = {
+      firstName: 'first name',
+      lastName: 'last name',
+      city: 'coolsberg',
+      state: 'cali',
+      userName: 'userName',
+      booksTraded: 2,
+      requestMade: 5,
+      requestReceived: 7
+    }
+  }, renderReactComponent )
 
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({

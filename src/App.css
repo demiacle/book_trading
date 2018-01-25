@@ -142,6 +142,9 @@ form input[type="submit"] {
   font-size: 14pt;
   border: none;
 }
+form input[type="submit"]:hover {
+  background-color: #2b8a2f;
+}
 #loginForm{
 
 }

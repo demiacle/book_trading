@@ -40,7 +40,7 @@ class Home extends Component {
               <input type="submit" value="Login" />
             </form>
           </div>
-          <p className="sub">*for demo purposes, registering any name/password will work as long as an identicle combination does not already taken</p>
+          <p className="sub">*for demo purposes, registering any name/password will work as long as an identicle combination is not already taken</p>
         </div>
         }
       </div>

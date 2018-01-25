@@ -12,7 +12,12 @@
 
 .book {
   background-color: blue;
-  width: 20px;
-  height: 20px;
-
+  border: 1px solid red;
+}
+#book-grid {
+  display:grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: 300px 300px 300px;
+  margin: auto;
+  width: 800px;
 }

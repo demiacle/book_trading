@@ -6,50 +6,45 @@ import './Books.css';
 // totalPages
 
 class Books extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    console.log( props )
+    console.log(props)
   }
 
   // TODO refactor into component
-  renderPagination(){
+  renderPagination() {
     var pagination = [];
-    var lowerBound = Math.max( 1, this.props.currentPage - 5 );
-    var higherBound = Math.min( this.props.totalPages, this.props.currentPage + 5 );
-
-    if( lowerBound > 1 ) {
-      pagination.push( <a href={ '/books?page=' + lowerBound - 5} key="low">&lt;</a> )
+    var lowerBound = Math.max(1, this.props.currentPage - 5);
+    var higherBound = Math.min( this.props.totalPages, this.props.currentPage + 5);
+    if (lowerBound > 1 ) {
+      pagination.push(<a href={'/books?page=' + lowerBound} key="low">&lt;</a>)
     }
 
-    for( var i = lowerBound; i <= higherBound; i++ ){
-      pagination.push( <a className={ i === this.props.currentPage ? 'bold' : '' } href={ '/books?page=' + i } key={i}>{i}</a> );
+    for (var i = lowerBound; i <= higherBound; i++) {
+      pagination.push(<a className={i === this.props.currentPage ? 'bold' : ''} href={'/books?page=' + i} key={'page' + i}>{i}</a>);
     }
 
-    if( higherBound > this.props.currentPage ){
-      pagination.push( <a href={ '/books?page=' + ( higherBound + 5 )} key="high">&gt;</a> )
+    if (higherBound > this.props.currentPage && higherBound !== this.props.totalPages ) {
+      pagination.push(<a href={'/books?page=' + (higherBound)} key="high">&gt;</a>)
     }
 
     return <div id="paginationContainer">{pagination}</div>
   }
 
-  renderBooks(){
+  renderBooks() {
     var books = this.props.books;
-    books = books.map(i=>{
-      return <div className='book'>{i}</div>
+    books = books.map(i => {
+      return <div className='book' key={'book' + i}>{i}</div>
     })
-
-
-    return <div className='booksContainer'>{books}</div>
-
+    return <div id='book-grid'>{books}</div>
   }
   renderTradeStatus() {
-
     return <div>TRADE STATUS</div>
   }
   render() {
     return (
       <div className="Books">
-        {this.props.isLoggedIn ? this.renderTradeStatus(): null}
+        {this.props.isLoggedIn ? this.renderTradeStatus() : null}
         <h1>Books&middot;Available&middot;For&middot;Trade</h1>
         {this.renderPagination()}
         {this.renderBooks()}
