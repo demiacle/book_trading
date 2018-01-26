@@ -11,13 +11,19 @@
 }
 
 .book {
-  background-color: blue;
-  border: 1px solid red;
+  background-color: #f3f3f3;
+  border: 1px solid #81c784;
+  border-radius: 3px;
+}
+.book:hover {
+  border-color: #abe3ae;
+  background-color: #fafafa;
 }
 #book-grid {
   display:grid;
   grid-template-columns: auto auto auto auto;
   grid-template-rows: 300px 300px 300px;
   margin: auto;
+  grid-gap: 10px;
   width: 800px;
 }

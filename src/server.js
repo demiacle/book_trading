@@ -5,11 +5,21 @@ import express from 'express';
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import { renderToString } from 'react-dom/server';
+import mongoose from 'mongoose'
+import bookModel from './models.js'
+console.log(process.env)
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const server = express();
 
-server.set('trust proxy', 1 )
+mongoose.connect(process.env.RAZZLE_DB)
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log('connecting to db')
+});
+
+server.set('trust proxy', 1)
 
 var sessionData = {
   secret: 'booksGud',
@@ -22,7 +32,7 @@ function renderReactComponent(req, res) {
   const context = {};
   const serverData = res.locals.serverData ? res.locals.serverData : {};
   console.log('servdata')
-  console.log( serverData )
+  console.log(serverData)
   // Render component to html
   const markup = renderToString(
     <StaticRouter context={context} location={req.url}>
@@ -58,27 +68,27 @@ function renderReactComponent(req, res) {
   }
 }
 
-function initializeServerData(req,res,next){
+function initializeServerData(req, res, next) {
   res.locals.serverData = {};
   next();
 }
-function isLoggedIn(req,res,next){
+function isLoggedIn(req, res, next) {
   console.log('is logged in?')
-  console.log( req.session )
-	if( req.session.user_id ){
-		res.locals.serverData.isLoggedIn = true;
-	}
+  console.log(req.session)
+  if (req.session.user_id) {
+    res.locals.serverData.isLoggedIn = true;
+  }
   next();
 }
-function requireLoggedIn(req,res,next){
-	if( req.session.user_id ){
-		next();
-	} else {
-		res.send('You must be logged in to access this page.');
-	}
+function requireLoggedIn(req, res, next) {
+  if (req.session.user_id) {
+    next();
+  } else {
+    res.send('You must be logged in to access this page.');
+  }
 }
-function requireNotLoggedIn(req,res,next){
-  if( req.session.user_id ){
+function requireNotLoggedIn(req, res, next) {
+  if (req.session.user_id) {
     res.send('You are already logged in');
   } else {
     next();
@@ -92,18 +102,18 @@ server
   .use(session(sessionData))
   .use(initializeServerData)
   // Routes
-  .get('/books', isLoggedIn, (req,res,next)=>{
+  .get('/books', isLoggedIn, (req, res, next) => {
     var currentPage = req.query.page ? req.query.page : 1;
-    res.locals.serverData.currentPage = parseInt( currentPage );
+    res.locals.serverData.currentPage = parseInt(currentPage, 10);
     // Query for total Pages
     res.locals.serverData.totalPages = 22;
     // find books within query limit currentPage -> currentPage+10
-    res.locals.serverData.books = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ]
+    res.locals.serverData.books = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     next();
-  }, renderReactComponent )
+  }, renderReactComponent)
 
-  .get('/', isLoggedIn, renderReactComponent )
-  .get('/profile', requireLoggedIn, (req,res,next)=>{
+  .get('/', isLoggedIn, renderReactComponent)
+  .get('/profile', requireLoggedIn, (req, res, next) => {
     // Get all profile data
     res.locals.serverData.profile = {
       firstName: 'first name',
@@ -115,12 +125,12 @@ server
       requestMade: 5,
       requestReceived: 7
     }
-  }, renderReactComponent )
+  }, renderReactComponent)
 
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({
     extended: true
-  })) 
+  }))
   .post('/register', requireNotLoggedIn, function (req, res) {
     var post = req.body;
 
@@ -135,7 +145,7 @@ server
   })
   .post('/login', requireNotLoggedIn, function (req, res) {
     var post = req.body;
-    
+
     // Check user and password in db
     // if exists set req.session.user_id to unique key
     if (post.user === '1' && post.password === '2') {
@@ -145,8 +155,19 @@ server
       res.send('That username/password combination does not exist, please register first!');
     }
   })
-  .get('/logout', function(req,res) {
-    req.session.destroy(()=>{
+  .post('add-book/:book', (req,res)=>{
+    console.log('addingbook')
+    /*
+var testModel = new bookModel({ title: 'test' })
+testModel.save((err, d) => {
+  if (err)
+    console.log(err)
+  console.log(d)
+});
+    */
+  })
+  .get('/logout', function (req, res) {
+    req.session.destroy(() => {
       res.redirect('/');
     })
   })
