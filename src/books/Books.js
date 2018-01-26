@@ -34,7 +34,7 @@ class Books extends Component {
   renderBooks() {
     var books = this.props.books;
     books = books.map(i => {
-      return <div className='book' key={'book' + i}>{i}</div>
+      return <div className='book' key={'book' + i.title}>{i.title}</div>
     })
     return <div id='book-grid'>{books}</div>
   }

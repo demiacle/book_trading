@@ -104,12 +104,16 @@ server
   // Routes
   .get('/books', isLoggedIn, (req, res, next) => {
     var currentPage = req.query.page ? req.query.page : 1;
-    res.locals.serverData.currentPage = parseInt(currentPage, 10);
-    // Query for total Pages
-    res.locals.serverData.totalPages = 22;
-    // find books within query limit currentPage -> currentPage+10
-    res.locals.serverData.books = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-    next();
+    currentPage = parseInt(currentPage, 10)
+    res.locals.serverData.currentPage = currentPage;
+    bookModel.find().sort('title').skip(currentPage * 12 - 12).limit(12).exec((err, docs) => {
+      console.log(docs)
+      // Query for total Pages
+      res.locals.serverData.totalPages = 22;
+      // find books within query limit currentPage -> currentPage+10
+      res.locals.serverData.books = docs
+      next()
+    });
   }, renderReactComponent)
 
   .get('/', isLoggedIn, renderReactComponent)
@@ -155,16 +159,17 @@ server
       res.send('That username/password combination does not exist, please register first!');
     }
   })
-  .post('add-book/:book', (req,res)=>{
-    console.log('addingbook')
-    /*
-var testModel = new bookModel({ title: 'test' })
-testModel.save((err, d) => {
-  if (err)
-    console.log(err)
-  console.log(d)
-});
-    */
+  .post('/add-book', (req, res) => {
+    console.log('addingbook ' + req.body.book)
+
+    var testModel = new bookModel({ title: req.body.book })
+    testModel.save((err, d) => {
+      if (err)
+        console.log(err)
+      console.log(d)
+      res.send('added' + req.body.book)
+    });
+
   })
   .get('/logout', function (req, res) {
     req.session.destroy(() => {
