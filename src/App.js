@@ -17,7 +17,7 @@ const App = (data) =>{
     <Switch>
       <Route exact path="/" render={() => <Home {...data} />} />
       <Route exact path="/profile" render={() => <Profile {...data} />} />
-      <Route exact path="/books" render={() => <Books {...data} />} />
+      <Route exact path="/books-for-trade" render={() => <Books {...data} />} />
     </Switch>
   </div>
 };

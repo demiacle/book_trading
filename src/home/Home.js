@@ -26,8 +26,12 @@ class Home extends Component {
           <div id="registerForm">
             <h3>Register</h3>
             <form action="/register" method="post">
-              <input type="text" name="user" placeholder="name" required/>
+              <input type="text" name="userName" placeholder="user-name" required/>
               <input type="text" name="password" placeholder="password" required/>
+              <input type="text" name="firstName" placeholder="first name" required/>
+              <input type="text" name="lastName" placeholder="last name" required/>
+              <input type="text" name="city" placeholder="city" required/>
+              <input type="text" name="state" placeholder="state" required/>
               <input type="submit" value="Register" />
             </form>
           </div>
@@ -35,7 +39,7 @@ class Home extends Component {
           <div id="loginForm">
             <h3>Login</h3>
             <form action="/login" method="post">
-              <input type="text" name="user" placeholder="name" required/>
+              <input type="text" name="userName" placeholder="user-name" required/>
               <input type="text" name="password" placeholder="password" required/>
               <input type="submit" value="Login" />
             </form>

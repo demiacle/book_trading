@@ -12,24 +12,31 @@ class Nav extends Component {
             </a>
           </li>
           <li>
-            <a href="/books">
-              <div>books</div>
+            <a href="/books-for-trade">
+              <div>Books</div>
             </a>
           </li>
           { this.props.isLoggedIn ?
           <li>
             <a href="/profile">
-              <div>profile</div>
+              <div>Profile</div>
             </a>
           </li> 
           :''}
-          { this.props.isLoggedIn ?
+          { this.props.isLoggedIn &&
+          <li>
+            <a href="/profile">
+              <div>Profile</div>
+            </a>
+          </li> 
+          }
+          { this.props.isLoggedIn &&
           <li>
             <a href="/logout">
-              <div>logout</div>
+              <div>Logout</div>
             </a>
           </li> 
-          :''}
+          }
           <li className="right">
             <form action="/search">
               <input type="text" placeholder="Search.." name="search" />

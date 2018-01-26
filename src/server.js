@@ -6,7 +6,8 @@ import bodyParser from 'body-parser'
 import session from 'express-session'
 import { renderToString } from 'react-dom/server';
 import mongoose from 'mongoose'
-import bookModel from './models.js'
+import { bookModel, userModel } from './models.js' // TODO REMOVE THIS ONCE ADD-BOOK IS IMPLEMENTED
+import db from './db.js'
 console.log(process.env)
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
@@ -102,7 +103,7 @@ server
   .use(session(sessionData))
   .use(initializeServerData)
   // Routes
-  .get('/books', isLoggedIn, (req, res, next) => {
+  .get('/books-for-trade', isLoggedIn, (req, res, next) => {
     var currentPage = req.query.page ? req.query.page : 1;
     currentPage = parseInt(currentPage, 10)
     res.locals.serverData.currentPage = currentPage;
@@ -119,6 +120,7 @@ server
   .get('/', isLoggedIn, renderReactComponent)
   .get('/profile', requireLoggedIn, (req, res, next) => {
     // Get all profile data
+    // And also all books user has
     res.locals.serverData.profile = {
       firstName: 'first name',
       lastName: 'last name',
@@ -130,6 +132,12 @@ server
       requestReceived: 7
     }
   }, renderReactComponent)
+  .get('/search/books-for-trade', (req,res)=>{
+
+  })
+  .get('/search/all-books', (req,res)=>{
+
+  })
 
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({
@@ -137,6 +145,7 @@ server
   }))
   .post('/register', requireNotLoggedIn, function (req, res) {
     var post = req.body;
+
 
     // Send user and password into db and get unique key
     // Set req.session.user_id to key
