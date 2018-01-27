@@ -7,7 +7,7 @@
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
     "start:prod": "node build/server.js",
-    "debug": "razzle start --inspect-brk"
+    "debug": "razzle start --inspect"
   },
   "dependencies": {
     "cookie-session": "^2.0.0-beta.3",
