@@ -14,7 +14,10 @@ var userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   city: String,
-  state: String
+  state: String,
+  requestsMade: Number,
+  requestsReceived: Number,
+  booksTraded: Number
 })
 
 export var userModel = mongoose.model('user', userSchema)

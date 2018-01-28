@@ -16,26 +16,24 @@ class Nav extends Component {
               <div>Books</div>
             </a>
           </li>
-          { this.props.isLoggedIn ?
-          <li>
-            <a href="/profile">
-              <div>Profile</div>
-            </a>
-          </li> 
-          :''}
-          { this.props.isLoggedIn &&
-          <li>
-            <a href="/profile">
-              <div>Profile</div>
-            </a>
-          </li> 
+          {this.props.isLoggedIn &&
+            <li>
+              <a href="/profile">
+                <div>Profile</div>
+              </a>
+            </li>
+          }
+          {this.props.isLoggedIn &&
+            <li>
+              <a href="/logout">
+                <div>Logout</div>
+              </a>
+            </li>
           }
           { this.props.isLoggedIn &&
-          <li>
-            <a href="/logout">
-              <div>Logout</div>
-            </a>
-          </li> 
+          <li className="user-name-display">
+            <div>UserName</div>
+          </li>
           }
           <li className="right">
             <form action="/search">

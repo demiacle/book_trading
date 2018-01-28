@@ -72,22 +72,21 @@ function initializeServerData(req, res, next) {
   next();
 }
 function isLoggedIn(req, res, next) {
-  console.log('is logged in?')
-  console.log(req.session)
   if (req.session.user) {
     res.locals.serverData.isLoggedIn = true;
   }
   next();
 }
 function requireLoggedIn(req, res, next) {
-  if (req.session.user_id) {
+  if (req.session.user) {
+    res.locals.serverData.isLoggedIn = true;
     next();
   } else {
     res.send('You must be logged in to access this page.');
   }
 }
 function requireNotLoggedIn(req, res, next) {
-  if (req.session.user_id) {
+  if (req.session.user) {
     res.send('You are already logged in');
   } else {
     next();
@@ -114,9 +113,10 @@ server
   }, renderReactComponent)
 
   .get('/', isLoggedIn, renderReactComponent)
-  .get('/profile', requireLoggedIn, (req, res, next) => {
+  .get('/profile', requireLoggedIn, async (req, res, next) => {
     // Get all profile data
     // And also all books user has
+    /*
     res.locals.serverData.profile = {
       firstName: 'first name',
       lastName: 'last name',
@@ -124,9 +124,21 @@ server
       state: 'cali',
       userName: 'userName',
       booksTraded: 2,
-      requestMade: 5,
-      requestReceived: 7
+      requestsMade: 5,
+      requestsReceived: 7
     }
+    */
+
+    //TODO req.session.user is saved as an ARRAY... false bad no good no thanks
+    //FIX PLEASE
+    //console.log( req.session.user )
+    var userData = {...req.session.user}[0]
+    console.log( 'user is')
+    delete userData._id
+    delete userData.__v
+    res.locals.serverData.profile = userData
+
+    next()
   }, renderReactComponent)
   .get('/search/books-for-trade', (req, res) => {
 
