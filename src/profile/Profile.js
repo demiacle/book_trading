@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Profile.css';
 
 class Profile extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     console.log(props)
     this.state = {
@@ -10,9 +10,9 @@ class Profile extends Component {
     }
   }
 
-  showModal(){
-    this.setState((prev)=>{
-      return { 
+  showModal() {
+    this.setState((prev) => {
+      return {
         isShowingModal: !prev.isShowingModal,
         field: 'test',
         value: 'yip'
@@ -23,27 +23,44 @@ class Profile extends Component {
   render() {
     var profile = this.props.profile;
     return (
-      <div className="Profile">
-        {this.state.isShowingModal ? <EditPromt field={this.state.field}/> : ''}
+      <div>
         <h1>Your Profile</h1>
-        <p>First name: {profile.firstName}<button onClick={this.showModal}>edit</button></p>
-        <p>Last name: {profile.lastName}<button onClick={this.showModal}>edit</button></p>
-        <p>city: {profile.city}<button onClick={this.showModal}>edit</button></p>
-        <p>state: {profile.state}<button onClick={this.showModal}>edit</button></p>
-        <p>user name: {profile.userName}<button onClick={this.showModal}>edit</button></p>
-        <p>password: *****<button onClick={this.showModal}>edit</button></p>
-        <br />
-        <br />
-        <p># of books traded: {profile.booksTraded}</p>
-        <p># of requests you've made: {profile.requestsMade}</p>
-        <p># of requests to trade with you: {profile.requestsReceived}</p>
+        <div id="profile-container">
+          {this.state.isShowingModal ? <EditPromt field={this.state.field} /> : ''}
+          <form id="profile-form">
+            <label htmlFor="first-name">First name:</label>
+            <input id="first-name "defaultValue={profile.firstName}></input>
+
+            <label htmlFor="last-name">Last name:</label>
+            <input id="last-name" defaultValue={profile.lastName}></input>
+
+            <label htmlFor="city">city:</label>
+            <input id="city" defaultValue={profile.city}></input>
+
+            <label htmlFor="state">state:</label>
+            <input id="state" defaultValue={profile.state}></input>
+
+            <label htmlFor="user-name">user name:</label>
+            <input id="user-name" defaultValue={profile.userName}></input>
+            
+            <label htmlFor="password">password:</label>
+            <input id="password" placeholder="*****"></input>
+            <div></div>
+            <button id="save-button" onClick={this.showModal}>Save</button>
+          </form>
+          <div id="profile-stats">
+          <p id="books-traded">Amount of books traded: {profile.booksTraded}</p>
+          <p id="requests-made">Amount of requests you've made: {profile.requestsMade}</p>
+          <p id="requests-received">Amount of requests to trade with you: {profile.requestsReceived}</p>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 class EditPromt extends Component {
-  render(){
+  render() {
     return <div>
       <form>
         <label>{this.props.field}

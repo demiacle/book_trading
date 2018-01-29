@@ -26,6 +26,44 @@
   display: inline-block;
   padding: 1rem;
 }
+#profile-form {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 6px;
+  border-bottom: 1px solid #81c784;
+  padding-bottom: 20px;
+}
+
+#profile-form label{
+  grid-column: 1/2;
+  text-align: right;
+  padding: 10px;
+}
+#profile-form input {
+  grid-column: 2/3;
+  padding: 10px;
+  border-radius: 0 10px 10px 0;
+  border: 1px solid #e6e6e6;
+}
+#profile-form button {
+  border-radius: 20px;
+  border: 1px solid #345494;
+  background-color: #5bc5e8;
+  height: 37px;
+}
+#profile-form button:hover {
+  background-color: #21b6e6;
+  cursor: pointer;
+}
+#profile-container {
+  width: 700px;
+  margin: auto;
+  margin-top: 30px;
+}
+#profile-stats {
+  padding-left: 126px;
+  padding-top: 20px;
+}
 
 @keyframes Home-logo-spin {
   from { transform: rotate(0deg); }
