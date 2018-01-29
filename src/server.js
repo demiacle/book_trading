@@ -103,8 +103,7 @@ server
   .get('/books-for-trade', isLoggedIn, async (req, res, next) => {
     var currentPage = req.query.page ? req.query.page : 1;
     currentPage = parseInt(currentPage, 10)
-    
-    var books = await dbController.findBooksForTrade( currentPage )
+    var books = await dbController.findBooksForTrade(currentPage)
     res.locals.serverData.books = books
     res.locals.serverData.currentPage = currentPage;
     // use books.total
@@ -114,30 +113,10 @@ server
 
   .get('/', isLoggedIn, renderReactComponent)
   .get('/profile', requireLoggedIn, async (req, res, next) => {
-    // Get all profile data
-    // And also all books user has
-    /*
-    res.locals.serverData.profile = {
-      firstName: 'first name',
-      lastName: 'last name',
-      city: 'coolsberg',
-      state: 'cali',
-      userName: 'userName',
-      booksTraded: 2,
-      requestsMade: 5,
-      requestsReceived: 7
-    }
-    */
-
-    //TODO req.session.user is saved as an ARRAY... false bad no good no thanks
-    //FIX PLEASE
-    //console.log( req.session.user )
-    var userData = {...req.session.user}[0]
-    console.log( 'user is')
+    var userData = {...req.session.user}
     delete userData._id
     delete userData.__v
     res.locals.serverData.profile = userData
-
     next()
   }, renderReactComponent)
   .get('/search/books-for-trade', (req, res) => {
@@ -151,33 +130,65 @@ server
   .use(bodyParser.urlencoded({
     extended: true
   }))
+  .post('/update-profile', requireLoggedIn, async (req, res) => {
+    var post = req.body
+    var updateQuery = {}
+    if (post.firstName) {
+      updateQuery.firstName = post.firstName
+    }
+    if (post.lastName) {
+      updateQuery.lastName = post.lastName
+    }
+    if (post.city) {
+      updateQuery.city = post.city
+    }
+    if (post.state) {
+      updateQuery.state = post.state
+    }
+    if (post.userName) {
+      updateQuery.userName = post.userName
+    }
+    if (post.password) {
+      updateQuery.password = post.password
+    }
+    if( Object.keys(updateQuery).length === 0){
+      res.redirect('/profile')
+      return
+    }
+    var updatedUser = await dbController.updateUser(
+      req.session.user._id,
+      updateQuery
+    )
+    req.session.user = updatedUser
+    res.redirect('/profile')
+  })
   .post('/register', requireNotLoggedIn, async function (req, res) {
     var post = req.body;
-    if ( !post.userName || !post.password || !post.firstName || !post.lastName || !post.city || !post.state ) {
-      res.redirect( encodeURI( '/?error=You must complete the form' ) )
+    if (!post.userName || !post.password || !post.firstName || !post.lastName || !post.city || !post.state) {
+      res.redirect(encodeURI('/?error=You must complete the form'))
       return;
     }
-    var user = await dbController.registerUser(post.userName, post.password, post.firstName, post.lastName, post.city, post.state )
+    var user = await dbController.registerUser(post.userName, post.password, post.firstName, post.lastName, post.city, post.state)
     if (user) {
       req.session.user = user
       res.redirect('/')
     } else {
-      res.redirect( encodeURI( '/?error=That username/password combination is already taken') )
+      res.redirect(encodeURI('/?error=That username/password combination is already taken'))
     }
   })
   .post('/login', requireNotLoggedIn, async function (req, res) {
     var post = req.body;
     var user = await dbController.authenticate(post.userName, post.password)
-    if ( user.length !== 0 ) {
+    if (user) {
       req.session.user = user;
       res.redirect('/')
     } else {
-      res.redirect( encodeURI( '/?error=That username/password combination does not exist, please register first' ) )
+      res.redirect(encodeURI('/?error=That username/password combination does not exist, please register first'))
     }
   })
   .post('/add-book', async (req, res) => {
     console.log('addingbook ' + req.body.book)
-    await dbController.addBook( req.body.book )
+    await dbController.addBook(req.body.book)
     res.send('added ' + req.body.book)
   })
   .get('/logout', function (req, res) {

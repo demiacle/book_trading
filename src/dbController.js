@@ -23,7 +23,7 @@ function registerUser(userName, password, firstName, lastName, city, state) {
         newUser.city = city;
         newUser.state = state;
         newUser.save((err, final) => {
-          if(err){
+          if (err) {
             console.log(err)
           }
           resolve(final)
@@ -35,7 +35,7 @@ function registerUser(userName, password, firstName, lastName, city, state) {
 
 function authenticate(userName, password) {
   return new Promise((resolve, reject) => {
-    userModel.find({ userName, password }).exec((err, user) => {
+    userModel.findOne({ userName, password }).exec((err, user) => {
       if (err) {
         console.log(err)
       }
@@ -63,8 +63,17 @@ function requestTrade() {
 
 }
 
-function updateUser() {
-
+function updateUser(userId, updateQuery) {
+  return new Promise((resolve, reject) => {
+    userModel.findOneAndUpdate({ _id: userId }, updateQuery, { new: true }, (err, user) => {
+      if (err) {
+        console.log(err)
+        resolve(false)
+        return;
+      }
+      resolve(user)
+    })
+  })
 }
 
 function acceptTrade() {
