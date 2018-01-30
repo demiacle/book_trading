@@ -39,9 +39,9 @@ class Books extends Component {
             <button type="submit">Add to your list</button>
           </form>
           :
-          <form action="/request-trade" method="POST">
+          <form action="/request-book" method="POST">
             <input type="hidden" name="id" value={i._id} />
-            <button type="submit">Request trade</button>
+            <button type="submit">Request book</button>
           </form>
         }
       </div>

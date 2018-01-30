@@ -78,8 +78,10 @@
 }
 .my-book {
   position: relative;
+  border: 1px solid black;
+  display: inline-block;
 }
-.my-book button{
+#remove-form button{
   position: absolute;
   top: 0;
   left: 0;
@@ -89,6 +91,10 @@
   background-color: white;
   color: red;
   border: 1px solid red;
+}
+#request-form button {
+  display: block;
+  width: 100%;
 }
 #my-books-title {
   margin-top: 14px;

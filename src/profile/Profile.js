@@ -23,10 +23,17 @@ class Profile extends Component {
     books = books.map(i => {
       return <div className='my-book' key={i.title + i.thumbnail}>
         <img src={i.thumbnail} alt={i.title} />
-        <form action="/remove-book-from-list" method="POST">
-          <input type="hidden" name="id" value={i._id} />
-          <button type="submit">X</button>
-        </form>
+        <div>
+          <form id="remove-form" action="/remove-book-from-list" method="POST">
+            <input type="hidden" name="id" value={i._id} />
+            <button type="submit">X</button>
+          </form>
+          <form id="request-form" action="/respond-to-request" method="POST">
+            <input type="hidden" name="id" value={i._id} />
+            <button type="submit" name="requestType" value="accept" disabled={!i.requestedByUser}>accept request</button>
+            <button type="submit" name="requestyType" value="deny" disabled={!i.requestedByUser}>deny request</button>
+          </form>
+        </div>
       </div>
     })
     return <div className="my-books">{books}</div>

@@ -32,7 +32,6 @@ function registerUser(userName, password, firstName, lastName, city, state) {
     })
   })
 }
-
 function authenticate(userName, password) {
   return new Promise((resolve, reject) => {
     userModel.findOne({ userName, password }).exec((err, user) => {
@@ -44,8 +43,6 @@ function authenticate(userName, password) {
     })
   })
 }
-
-
 function addBookToList(title, thumbnail, user) {
   return new Promise((resolve, reject) => {
     var book = new bookModel({ title, thumbnail, user })
@@ -58,30 +55,53 @@ function addBookToList(title, thumbnail, user) {
     });
   })
 }
-
-function requestTrade() {
-
+function requestBook(bookId, userId) {
+  return new Promise((resolve, reject) => {
+    bookModel.findOneAndUpdate({ _id: bookId, requestedByUser: { $exists: false } }, { requestedByUser: userId }, (err, post) => {
+      if (err) {
+        console.log(err)
+      }
+      resolve(true)
+    })
+  })
 }
-
 function updateUser(userId, updateQuery) {
   return new Promise((resolve, reject) => {
     userModel.findOneAndUpdate({ _id: userId }, updateQuery, { new: true }, (err, user) => {
-
       if (err) {
         console.log(err)
         resolve(false)
         return;
       }
-
       resolve(user)
     })
   })
 }
-
-function acceptTrade() {
-
+function acceptRequest(id, userId) {
+  return new Promise((resolve, reject) => {
+    bookModel.remove({ _id: id }, (err) => {
+      if (err) {
+        console.log(err)
+      }
+      userModel.findOneAndUpdate({ _id: userId }, { $inc: { booksTraded: 1 } }, (err, user) => {
+        if (err) {
+          console.log(err)
+        }
+        resolve(user)
+      })
+    })
+  })
 }
-
+function denyRequest(id) {
+  return new Promise((resolve, reject) => {
+    bookModel.findOneAndUpdate({ _id: id }, { $unset: { requestedByUser: 1 } }, (err) => {
+      if (err) {
+        console.log(err)
+      }
+      resolve(true)
+    })
+  })
+}
 function getBooksForTrade(currentPage) {
   return new Promise((resolve, reject) => {
     bookModel.find().sort('title').skip(currentPage * 12 - 12).limit(12).exec((err, docs) => {
@@ -93,7 +113,6 @@ function getBooksForTrade(currentPage) {
     });
   })
 }
-
 function searchBooksForTrade(query) {
   // Combine whitespace
   query = query.replace(/\s+/, ' ')
@@ -125,7 +144,6 @@ function searchBooksForTrade(query) {
     })
   })
 }
-
 function getTotalBooks() {
   return new Promise((resolve, reject) => {
     bookModel.count({}, (err, count) => {
@@ -136,7 +154,6 @@ function getTotalBooks() {
     })
   })
 }
-
 function getUserBooks(userId) {
   return new Promise((resolve, reject) => {
     bookModel.find({ user: userId }, (err, books) => {
@@ -147,25 +164,24 @@ function getUserBooks(userId) {
     })
   })
 }
-
-function removeBookFromList( id){
-  return new Promise((resolve, reject)=>{
-    bookModel.remove({_id: id}, (err)=>{
-      if(err){
+function removeBookFromList(id) {
+  return new Promise((resolve, reject) => {
+    bookModel.remove({ _id: id }, (err) => {
+      if (err) {
         console.log(err)
       }
       resolve(true)
     })
   })
 }
-
 export default {
   registerUser,
   authenticate,
   addBookToList,
-  requestTrade,
+  requestBook,
   updateUser,
-  acceptTrade,
+  acceptRequest,
+  denyRequest,
   getBooksForTrade,
   searchBooksForTrade,
   getTotalBooks,

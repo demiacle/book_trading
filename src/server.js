@@ -119,7 +119,7 @@ server
     delete userData._id
     delete userData.__v
     res.locals.serverData.profile = userData
-    res.locals.serverData.userBooks = await dbController.getUserBooks( req.session.user._id )
+    res.locals.serverData.userBooks = await dbController.getUserBooks(req.session.user._id)
     next()
   }, renderReactComponent)
   .get('/books-for-trade/search', async (req, res, next) => {
@@ -212,14 +212,24 @@ server
     await dbController.addBookToList(req.body.title, req.body.thumbnail, req.session.user._id)
     res.redirect('/profile')
   })
-  .post('/remove-book-from-list', async (req, res)=>{
-    await dbController.removeBookFromList( req.body.id )
+  .post('/remove-book-from-list', async (req, res) => {
+    await dbController.removeBookFromList(req.body.id)
     res.redirect('/profile')
   })
-  .post('/request-trade', (req,res)=>{
+  .post('/request-book', requireLoggedIn, async (req, res) => {
+    var bookId = req.body.id
+    await dbController.requestBook(bookId, req.session.user._id)
+    res.redirect('/profile')
+  })
+  .post('/respond-to-request', requireLoggedIn, async (req, res) => {
+    var id = req.body.id
+    if (req.body.requestType === "accept") {
+      req.session.user = await dbController.acceptRequest(id, req.session.user._id)
+    } else {
+      await dbController.denyRequest(id)
+    }
+    res.redirect('/profile')
+  })
 
-    // add request to array to trade to bookmodel _id
-    res.redirect('/profile')
-  })
 
 export default server;

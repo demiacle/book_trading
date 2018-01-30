@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 var bookSchema = new mongoose.Schema({
   title: String,
   thumbnail: String,
+  requestedByUser: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' }
 })
 
