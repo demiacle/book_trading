@@ -5,12 +5,10 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     console.log(props)
-    this.updateProfile = this.updateProfile.bind(this)
     this.state = {
       isShowingModal: false
     }
   }
-
   showModal() {
     this.setState((prev) => {
       return {
@@ -20,22 +18,6 @@ class Profile extends Component {
       }
     })
   }
-
-  updateProfile(){
-    /*
-    fetch('/update-profile', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      method: 'POST',
-      body: JSON.stringify()
-    })
-    .then()
-    */
-  }
-
   render() {
     var profile = this.props.profile;
     return (
@@ -66,8 +48,6 @@ class Profile extends Component {
           </form>
           <div id="profile-stats">
           <p id="books-traded">Amount of books traded: {profile.booksTraded}</p>
-          <p id="requests-made">Amount of requests you've made: {profile.requestsMade}</p>
-          <p id="requests-received">Amount of requests to trade with you: {profile.requestsReceived}</p>
           </div>
           <form id="add-book-form" action="/google-books" method="GET">
             <input type='text' name="search" placeholder="Search..." required />
@@ -78,7 +58,6 @@ class Profile extends Component {
     );
   }
 }
-
 class EditPromt extends Component {
   render() {
     return <div>

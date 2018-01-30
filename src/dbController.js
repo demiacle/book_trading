@@ -5,7 +5,6 @@ function registerUser(userName, password, firstName, lastName, city, state) {
     userName,
     password
   }
-  console.log('t')
   return new Promise((resolve, reject) => {
     userModel.find(query, (err, user) => {
       if (err) {
@@ -88,10 +87,8 @@ function getBooksForTrade(currentPage) {
       if (err) {
         console.log(err)
       }
-
       console.log(docs)
       resolve(docs)
-      // Query for total Pages
     });
   })
 }

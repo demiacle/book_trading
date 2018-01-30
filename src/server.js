@@ -113,7 +113,6 @@ server
     res.locals.serverData.isShowingPagination = true
     next()
   }, renderReactComponent)
-
   .get('/', isLoggedIn, renderReactComponent)
   .get('/profile', requireLoggedIn, async (req, res, next) => {
     var userData = { ...req.session.user }
@@ -125,13 +124,10 @@ server
   .get('/books-for-trade/search', async (req, res, next) => {
     var query = req.query.title
     var books = await dbController.searchBooksForTrade(query)
-
-    console.log(books)
     res.locals.serverData.books = books
     res.locals.serverData.query = query
     next()
   }, renderReactComponent)
-
   .get('/google-books', requireLoggedIn, (req, res, next) => {
     var query = req.query.search
     googleBooks.search(query, { limit: 12 }, (err, results) => {
@@ -141,16 +137,15 @@ server
       } else {
         console.log(results)
         res.locals.serverData.books = results
-
-        // parse books
         next()
       }
     })
   }, renderReactComponent)
-  .get('/search/all-books', (req, res) => {
-
+  .get('/logout', function (req, res) {
+    req.session = null
+    res.redirect('/');
   })
-
+  // ** POST REQUESTS **
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({
     extended: true
@@ -216,9 +211,10 @@ server
     await dbController.addBookToList(req.body.title, req.body.thumbnail, req.session.user._id)
     res.redirect('/profile')
   })
-  .get('/logout', function (req, res) {
-    req.session = null
-    res.redirect('/');
+  .post('/request-trade', (req,res)=>{
+
+    // add request to array to trade to bookmodel _id
+    res.redirect('/profile')
   })
 
 export default server;
