@@ -50,7 +50,7 @@
   background-color: #0dace0;
 }
 #book-grid {
-  display:grid;
+  display: grid;
   grid-template-columns: auto auto auto auto;
   grid-template-rows: 324px 324px 324px;
   margin: auto;

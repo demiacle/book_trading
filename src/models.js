@@ -1,13 +1,13 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 var bookSchema = new mongoose.Schema({
   title: String,
   thumbnail: String,
-  requestedByUser: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' }
-})
+  requestedByUser: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "user" }
+});
 
-export var bookModel = mongoose.model('book', bookSchema)
+export var bookModel = mongoose.model("book", bookSchema);
 
 var userSchema = new mongoose.Schema({
   userName: String,
@@ -17,9 +17,9 @@ var userSchema = new mongoose.Schema({
   city: String,
   state: String,
   booksTraded: Number,
-  requestedBooks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'book' }]
-})
+  requestedBooks: [{ type: mongoose.Schema.Types.ObjectId, ref: "book" }]
+});
 
-export var userModel = mongoose.model('user', userSchema)
+export var userModel = mongoose.model("user", userSchema);
 
-export default { bookModel, userModel }
+export default { bookModel, userModel };

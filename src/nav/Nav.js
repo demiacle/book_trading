@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './Nav.css';
+import React, { Component } from "react";
+import "./Nav.css";
 
 class Nav extends Component {
   render() {
@@ -8,7 +8,7 @@ class Nav extends Component {
         <ul>
           <li>
             <a href="/">
-              <div>Home</div >
+              <div>Home</div>
             </a>
           </li>
           <li>
@@ -16,28 +16,28 @@ class Nav extends Component {
               <div>Books</div>
             </a>
           </li>
-          {this.props.isLoggedIn &&
+          {this.props.isLoggedIn && (
             <li>
               <a href="/profile">
                 <div>Profile</div>
               </a>
             </li>
-          }
-          {this.props.isLoggedIn &&
+          )}
+          {this.props.isLoggedIn && (
             <li>
               <a href="/logout">
                 <div>Logout</div>
               </a>
             </li>
-          }
-          { this.props.isLoggedIn &&
-          <li className="user-name-display">
-            <div>UserName</div>
-          </li>
-          }
+          )}
+          {this.props.isLoggedIn && (
+            <li className="user-name-display">
+              <div>UserName</div>
+            </li>
+          )}
           <li className="right">
             <form action="/books-for-trade/search">
-              <input type="text" placeholder="Search.." name="title" required/>
+              <input type="text" placeholder="Search.." name="title" required />
               <button type="submit">search</button>
             </form>
           </li>

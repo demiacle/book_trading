@@ -32,7 +32,7 @@
   grid-gap: 6px;
 }
 
-#profile-form label{
+#profile-form label {
   grid-column: 1/2;
   text-align: right;
   padding: 10px;
@@ -72,6 +72,7 @@
   border: 1px solid black;
   text-align: center;
 }
+
 #add-book-form {
   text-align: center;
   margin-top: 20px;
@@ -81,7 +82,7 @@
   border: 1px solid black;
   display: inline-block;
 }
-#remove-form button{
+#remove-form button {
   position: absolute;
   top: 0;
   left: 0;
@@ -102,6 +103,10 @@
 }
 
 @keyframes Home-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
