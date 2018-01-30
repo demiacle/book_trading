@@ -4,7 +4,6 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 
 // Creates a react client from a static page
-
 const preloadedState = window.__PRELOADED_STATE__
 delete window.__PRELOADED_STATE__
 

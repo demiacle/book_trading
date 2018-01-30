@@ -105,10 +105,11 @@ server
     var currentPage = req.query.page ? req.query.page : 1;
     currentPage = parseInt(currentPage, 10)
     var books = await dbController.getBooksForTrade(currentPage)
+    var totalBooks = await dbController.getTotalBooks()
     res.locals.serverData.books = books
     res.locals.serverData.currentPage = currentPage;
     // use books.total
-    res.locals.serverData.totalPages = 22;
+    res.locals.serverData.totalPages = Math.ceil( totalBooks / 12 );
     res.locals.serverData.isShowingPagination = true
     next()
   }, renderReactComponent)

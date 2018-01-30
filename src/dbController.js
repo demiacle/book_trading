@@ -128,6 +128,17 @@ function searchBooksForTrade(query) {
   })
 }
 
+function getTotalBooks(){
+  return new Promise((resolve, reject)=>{
+    bookModel.count({}, (err, count)=>{
+      if(err){
+        console.log(err)
+      }
+      resolve(count)
+    })
+  })
+}
+
 export default {
   registerUser,
   authenticate,
@@ -136,5 +147,6 @@ export default {
   updateUser,
   acceptTrade,
   getBooksForTrade,
-  searchBooksForTrade
+  searchBooksForTrade,
+  getTotalBooks
 }
