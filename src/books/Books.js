@@ -16,7 +16,7 @@ class Books extends Component {
     }
 
     for (var i = lowerBound; i <= higherBound; i++) {
-      pagination.push(<a className={i === this.props.currentPage ? 'bold' : ''} href={'/books-for-trade?page=' + i} key={'page' + i}>{i}</a>);
+      pagination.push( <a className={i === this.props.currentPage ? 'bold' : ''} href={'/books-for-trade?page=' + i} key={'page' + i}>{i}</a>);
     }
 
     if (higherBound > this.props.currentPage && higherBound !== this.props.totalPages ) {
@@ -29,17 +29,27 @@ class Books extends Component {
   renderBooks() {
     var books = this.props.books;
     books = books.map(i => {
-      return <div className='book' key={'book' + i.title}>{i.title}</div>
+      return <div className='book' key={i.thumbnail}>
+      <h3>{i.title}</h3>
+      <img src={i.thumbnail} alt={i.title} />
+      <form action="/add-book-to-list" method="POST">
+      <input type="hidden" name="title" value={i.title} />
+      <input type="hidden" name="thumbnail" value={i.thumbnail} />
+      <button type="submit">Add to your list</button>
+      </form>
+      </div>
     })
     return <div id='book-grid'>{books}</div>
   }
   renderTradeStatus() {
-    return <div>TRADE STATUS</div>
+    return <div id="trade-status">
+    <p>TRADE STATUS</p>
+    </div>
   }
   render() {
     return (
       <div className="Books">
-        {this.props.isLoggedIn ? this.renderTradeStatus() : null}
+        {this.props.isLoggedIn && this.renderTradeStatus()}
         <h1>Books&middot;Available&middot;For&middot;Trade</h1>
         { this.props.query && <h1>Search for {this.props.query}</h1>}
         {this.props.isShowingPagination && this.renderPagination()}

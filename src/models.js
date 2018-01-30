@@ -2,8 +2,8 @@ import mongoose from 'mongoose'
 
 var bookSchema = new mongoose.Schema({
   title: String,
-  isbn: String,
-  thumbnail: String
+  thumbnail: String,
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' }
 })
 
 export var bookModel = mongoose.model('book', bookSchema)

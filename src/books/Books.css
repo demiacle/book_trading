@@ -4,27 +4,58 @@
   margin-right: 10px;
   text-decoration: none;
 }
-
 .bold {
   font-weight: bold;
   text-decoration: underline !important;
 }
-
 .book {
-  background-color: #f3f3f3;
+  background-color: #f7f7f7;
   border: 1px solid #81c784;
   border-radius: 3px;
+  position: relative;
 }
 .book:hover {
   border-color: #abe3ae;
-  background-color: #fafafa;
+  background-color: white;
+}
+.book:hover img {
+  border-color: #0bd2d4;
+}
+.book h3 {
+  padding: 6px;
+  padding-top: 10px;
+  text-align: center;
+  min-height: 54px;
+  color: #464646;
+}
+.book img {
+  width: 128px;
+  margin: auto;
+  display: block;
+  border: 1px solid #4caf50;
+}
+.book button {
+  margin: auto;
+  width: 80%;
+  margin-left: 10%;
+  position: absolute;
+  bottom: 10px;
+  border-radius: 20px;
+  padding: 4px;
+  border: 1px solid #3b91ad;
+  background-color: #5bc5e8;
+  cursor: pointer;
+}
+.book button:hover {
+  background-color: #0dace0;
 }
 #book-grid {
   display:grid;
   grid-template-columns: auto auto auto auto;
-  grid-template-rows: 300px 300px 300px;
+  grid-template-rows: 324px 324px 324px;
   margin: auto;
   grid-gap: 10px;
+  padding-top: 20px;
   width: 800px;
 }
 .no-books-found {

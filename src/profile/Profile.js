@@ -69,6 +69,10 @@ class Profile extends Component {
           <p id="requests-made">Amount of requests you've made: {profile.requestsMade}</p>
           <p id="requests-received">Amount of requests to trade with you: {profile.requestsReceived}</p>
           </div>
+          <form id="add-book-form" action="/google-books" method="GET">
+            <input type='text' name="search" placeholder="Search..." required />
+            <button type="submit">Search</button>
+          </form>
         </div>
       </div>
     );

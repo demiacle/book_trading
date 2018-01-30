@@ -18,6 +18,7 @@ const App = (data) =>{
       <Route exact path="/" render={() => <Home {...data} />} />
       <Route exact path="/profile" render={() => <Profile {...data} />} />
       <Route path="/books-for-trade" render={() => <Books {...data} />} />
+      <Route path="/google-books" render={() => <Books {...data} />} />
     </Switch>
   </div>
 };

@@ -109,7 +109,7 @@ server
     res.locals.serverData.books = books
     res.locals.serverData.currentPage = currentPage;
     // use books.total
-    res.locals.serverData.totalPages = Math.ceil( totalBooks / 12 );
+    res.locals.serverData.totalPages = Math.ceil(totalBooks / 12);
     res.locals.serverData.isShowingPagination = true
     next()
   }, renderReactComponent)
@@ -124,7 +124,7 @@ server
   }, renderReactComponent)
   .get('/books-for-trade/search', async (req, res, next) => {
     var query = req.query.title
-    var books = await dbController.searchBooksForTrade( query )
+    var books = await dbController.searchBooksForTrade(query)
 
     console.log(books)
     res.locals.serverData.books = books
@@ -132,19 +132,21 @@ server
     next()
   }, renderReactComponent)
 
-  .get('/add-book/search', (req, res) => {
-    var query = req.query.title
-    googleBooks.search(query, (err, results) => {
+  .get('/google-books', requireLoggedIn, (req, res, next) => {
+    var query = req.query.search
+    googleBooks.search(query, { limit: 12 }, (err, results) => {
       if (err) {
         console.log(err)
         res.send('An error occured')
       } else {
         console.log(results)
-        // array of objects with some gooooood props
-        res.send('WORKS')
+        res.locals.serverData.books = results
+
+        // parse books
+        next()
       }
     })
-  })
+  }, renderReactComponent)
   .get('/search/all-books', (req, res) => {
 
   })
@@ -209,10 +211,10 @@ server
       res.redirect(encodeURI('/?error=That username/password combination does not exist, please register first'))
     }
   })
-  .post('/add-book', async (req, res) => {
-    console.log('addingbook ' + req.body.book)
-    await dbController.addBook(req.body.book)
-    res.send('added ' + req.body.book)
+  .post('/add-book-to-list', async (req, res) => {
+    console.log('addingbook ' + req.body.title)
+    await dbController.addBookToList(req.body.title, req.body.thumbnail, req.session.user._id)
+    res.redirect('/profile')
   })
   .get('/logout', function (req, res) {
     req.session = null

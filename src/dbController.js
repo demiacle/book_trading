@@ -46,15 +46,15 @@ function authenticate(userName, password) {
 }
 
 
-function addBook(title) {
-  return Promise((resolve, reject) => {
-    var testModel = new bookModel({ title })
-    testModel.save((err, d) => {
+function addBookToList(title, thumbnail, user) {
+  return new Promise((resolve, reject) => {
+    var book = new bookModel({ title, thumbnail, user })
+    book.save((err, d) => {
       if (err) {
         console.log(err)
       }
       console.log(d)
-      resolve()
+      resolve(true)
     });
   })
 }
@@ -142,7 +142,7 @@ function getTotalBooks(){
 export default {
   registerUser,
   authenticate,
-  addBook,
+  addBookToList,
   requestTrade,
   updateUser,
   acceptTrade,
