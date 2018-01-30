@@ -218,7 +218,7 @@ server
   })
   .post('/request-book', requireLoggedIn, async (req, res) => {
     var bookId = req.body.id
-    await dbController.requestBook(bookId, req.session.user._id)
+    await dbController.requestBook(bookId, req.session.user)
     res.redirect('/profile')
   })
   .post('/respond-to-request', requireLoggedIn, async (req, res) => {

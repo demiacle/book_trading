@@ -15,6 +15,7 @@ function registerUser(userName, password, firstName, lastName, city, state) {
         resolve(false)
       } else {
         var newUser = new userModel();
+        newUser.requestedBooks = []
         newUser.userName = userName;
         newUser.password = password;
         newUser.firstName = firstName;
@@ -61,7 +62,9 @@ function requestBook(bookId, userId) {
       if (err) {
         console.log(err)
       }
-      resolve(true)
+      userModel.findOneAndUpdate({ _id: userId }, { $push: { requestedBooks: bookId } }, (err, user) => {
+        resolve(true)
+      })
     })
   })
 }

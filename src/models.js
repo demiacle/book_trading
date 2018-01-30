@@ -16,7 +16,8 @@ var userSchema = new mongoose.Schema({
   lastName: String,
   city: String,
   state: String,
-  booksTraded: Number
+  booksTraded: Number,
+  requestedBooks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'book' }]
 })
 
 export var userModel = mongoose.model('user', userSchema)
