@@ -22,7 +22,7 @@ class Profile extends Component {
   }
 
   updateProfile(){
-    return;
+    /*
     fetch('/update-profile', {
       headers: {
         'Accept': 'application/json',
@@ -33,6 +33,7 @@ class Profile extends Component {
       body: JSON.stringify()
     })
     .then()
+    */
   }
 
   render() {

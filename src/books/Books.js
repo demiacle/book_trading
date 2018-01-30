@@ -46,9 +46,11 @@ class Books extends Component {
       <div className="Books">
         {this.props.isLoggedIn ? this.renderTradeStatus() : null}
         <h1>Books&middot;Available&middot;For&middot;Trade</h1>
-        {this.renderPagination()}
+        { this.props.query && <h1>Search for {this.props.query}</h1>}
+        {this.props.isShowingPagination && this.renderPagination()}
+        {this.props.books.length === 0 && <p className="no-books-found">No books found</p>}
         {this.renderBooks()}
-        {this.renderPagination()}
+        {this.props.isShowingPagination && this.renderPagination()}
       </div>
     );
   }

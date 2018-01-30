@@ -36,8 +36,8 @@ class Nav extends Component {
           </li>
           }
           <li className="right">
-            <form action="/search">
-              <input type="text" placeholder="Search.." name="search" />
+            <form action="/books-for-trade/search">
+              <input type="text" placeholder="Search.." name="title" required/>
               <button type="submit">search</button>
             </form>
           </li>

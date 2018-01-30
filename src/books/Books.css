@@ -27,3 +27,7 @@
   grid-gap: 10px;
   width: 800px;
 }
+.no-books-found {
+  text-align: center;
+  padding: 20px;
+}

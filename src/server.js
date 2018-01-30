@@ -7,6 +7,7 @@ import session from 'cookie-session'
 import { renderToString } from 'react-dom/server';
 import mongoose from 'mongoose'
 import dbController from './dbController.js'
+import googleBooks from 'google-books-search'
 console.log(process.env)
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
@@ -103,24 +104,45 @@ server
   .get('/books-for-trade', isLoggedIn, async (req, res, next) => {
     var currentPage = req.query.page ? req.query.page : 1;
     currentPage = parseInt(currentPage, 10)
-    var books = await dbController.findBooksForTrade(currentPage)
+    var books = await dbController.getBooksForTrade(currentPage)
     res.locals.serverData.books = books
     res.locals.serverData.currentPage = currentPage;
     // use books.total
     res.locals.serverData.totalPages = 22;
+    res.locals.serverData.isShowingPagination = true
     next()
   }, renderReactComponent)
 
   .get('/', isLoggedIn, renderReactComponent)
   .get('/profile', requireLoggedIn, async (req, res, next) => {
-    var userData = {...req.session.user}
+    var userData = { ...req.session.user }
     delete userData._id
     delete userData.__v
     res.locals.serverData.profile = userData
     next()
   }, renderReactComponent)
-  .get('/search/books-for-trade', (req, res) => {
+  .get('/books-for-trade/search', async (req, res, next) => {
+    var query = req.query.title
+    var books = await dbController.searchBooksForTrade( query )
 
+    console.log(books)
+    res.locals.serverData.books = books
+    res.locals.serverData.query = query
+    next()
+  }, renderReactComponent)
+
+  .get('/add-book/search', (req, res) => {
+    var query = req.query.title
+    googleBooks.search(query, (err, results) => {
+      if (err) {
+        console.log(err)
+        res.send('An error occured')
+      } else {
+        console.log(results)
+        // array of objects with some gooooood props
+        res.send('WORKS')
+      }
+    })
   })
   .get('/search/all-books', (req, res) => {
 
@@ -151,7 +173,7 @@ server
     if (post.password) {
       updateQuery.password = post.password
     }
-    if( Object.keys(updateQuery).length === 0){
+    if (Object.keys(updateQuery).length === 0) {
       res.redirect('/profile')
       return
     }
