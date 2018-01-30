@@ -30,11 +30,6 @@ class Nav extends Component {
               </a>
             </li>
           )}
-          {this.props.isLoggedIn && (
-            <li className="user-name-display">
-              <div>UserName</div>
-            </li>
-          )}
           <li className="right">
             <form action="/books-for-trade/search">
               <input type="text" placeholder="Search.." name="title" required />

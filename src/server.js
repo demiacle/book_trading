@@ -60,6 +60,7 @@ function renderReactComponent(req, res) {
             ? `<script src="${assets.client.js}" defer></script>`
             : `<script src="${assets.client.js}" defer crossorigin></script>`
         }
+        <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(serverData).replace(
             /</g,
@@ -118,6 +119,9 @@ server
       var totalBooks = await dbController.getTotalBooks();
       res.locals.serverData.books = books;
       res.locals.serverData.currentPage = currentPage;
+      res.locals.serverData.requestedBooks = await dbController.getBooksById(
+        req.session.user.requestedBooks
+      );
       // use books.total
       res.locals.serverData.totalPages = Math.ceil(totalBooks / 12);
       res.locals.serverData.isShowingPagination = true;
@@ -272,7 +276,7 @@ server
   })
   .post("/request-book", requireLoggedIn, async (req, res) => {
     var bookId = req.body.id;
-    await dbController.requestBook(bookId, req.session.user);
+    req.session.user = await dbController.requestBook(bookId, req.session.user);
     res.redirect("/profile");
   })
   .post("/respond-to-request", requireLoggedIn, async (req, res) => {

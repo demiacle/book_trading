@@ -72,17 +72,24 @@ class Books extends Component {
     return <div id="book-grid">{books}</div>;
   }
   renderTradeStatus() {
+    var requestedBooks = this.props.requestedBooks;
+    requestedBooks = requestedBooks.map((i, index) => (
+      <li key={i.title + index}>{i.title}</li>
+    ));
     return (
       <div id="trade-status">
-        <p>TRADE STATUS</p>
+        <p>Books you've requested</p>
+        <ul>{requestedBooks}</ul>
       </div>
     );
   }
   render() {
     return (
       <div className="Books">
-        {this.props.isLoggedIn && this.renderTradeStatus()}
         <h1>Books&middot;Available&middot;For&middot;Trade</h1>
+        {this.props.isLoggedIn &&
+          !this.props.location &&
+          this.renderTradeStatus()}
         {this.props.query && <h1>Search for {this.props.query}</h1>}
         {this.props.isShowingPagination && this.renderPagination()}
         {this.props.books.length === 0 && (

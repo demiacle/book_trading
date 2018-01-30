@@ -9,9 +9,11 @@ a {
 h1,
 h2,
 h3,
-p {
+p,
+li {
   color: rgb(55, 55, 55);
   margin: 0;
+  font-family: "EB Garamond", serif;
 }
 h1,
 h2 {
@@ -19,16 +21,9 @@ h2 {
   background-color: #81c784;
 }
 h1 {
-  letter-spacing: -4px;
-  font-size: 34pt;
-  font-family: serif;
-  text-shadow: 2px 1px 1px #c6ffc8;
-}
-form {
-}
-h2 {
   letter-spacing: -1px;
-  font-family: serif;
+  font-size: 34pt;
+  text-shadow: 2px 1px 1px #c6ffc8;
 }
 p {
   font-size: 18pt;

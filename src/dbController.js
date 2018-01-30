@@ -61,6 +61,7 @@ function requestBook(bookId, userId) {
     bookModel.findOneAndUpdate(
       { _id: bookId, requestedByUser: { $exists: false } },
       { requestedByUser: userId },
+      { new: true },
       (err, post) => {
         if (err) {
           console.log(err);
@@ -68,8 +69,9 @@ function requestBook(bookId, userId) {
         userModel.findOneAndUpdate(
           { _id: userId },
           { $push: { requestedBooks: bookId } },
+          { new: true },
           (err, user) => {
-            resolve(true);
+            resolve(user);
           }
         );
       }
@@ -130,7 +132,7 @@ function denyRequest(id) {
 function getBooksForTrade(currentPage) {
   return new Promise((resolve, reject) => {
     bookModel
-      .find()
+      .find({ requestedByUser: { $exists: false } })
       .sort("title")
       .skip(currentPage * 12 - 12)
       .limit(12)
@@ -141,6 +143,16 @@ function getBooksForTrade(currentPage) {
         console.log(docs);
         resolve(docs);
       });
+  });
+}
+function getBooksById(id) {
+  return new Promise((resolve, reject) => {
+    bookModel.find({ _id: { $in: id } }, (err, books) => {
+      if (err) {
+        console.log(err);
+      }
+      resolve(books);
+    });
   });
 }
 function searchBooksForTrade(query) {
@@ -219,5 +231,6 @@ export default {
   searchBooksForTrade,
   getTotalBooks,
   getUserBooks,
-  removeBookFromList
+  removeBookFromList,
+  getBooksById
 };

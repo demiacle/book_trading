@@ -55,10 +55,42 @@
   grid-template-rows: 324px 324px 324px;
   margin: auto;
   grid-gap: 10px;
-  padding-top: 20px;
-  width: 800px;
+  padding: 20px;
+  max-width: 900px;
 }
 .no-books-found {
   text-align: center;
   padding: 20px;
 }
+#trade-status {
+  list-style-position: inside;
+  width: 80%;
+  margin: auto;
+  margin-top: 14px;
+}
+#trade-status p:first-child {
+  text-align: center;
+  border-bottom: 1px solid #81c784;
+}
+#trade-status ul {
+  background-color: #e4ffe5;
+}
+#trade-status li {
+  list-style-type: circle;
+  font-size: 14pt;
+  padding: 2px;
+}
+/* THESE SLOW DOWN THINGS WHY
+@media (max-width: 860px) {
+  #book-grid {
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 324px 324px 324px 324px;
+  }
+}
+@media (max-width: 660px) {
+  #book-grid {
+    grid-template-columns: auto auto;
+    grid-template-rows: 324px 324px 324px 324px 324px 324px;
+  }
+}
+*/

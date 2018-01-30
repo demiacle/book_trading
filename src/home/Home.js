@@ -32,7 +32,7 @@ class Home extends Component {
         {this.props.isLoggedIn ? (
           <div className="login-message">
             <p>You are logged in</p>
-            <p> Search or browse books to start trading!</p>
+            <p> Search &amp; browse books to start trading!</p>
           </div>
         ) : (
           <div id="indexBottom">

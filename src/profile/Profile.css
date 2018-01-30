@@ -1,27 +1,22 @@
 .Home {
   text-align: center;
 }
-
 .Home-logo {
   animation: Home-logo-spin infinite 20s linear;
   height: 80px;
 }
-
 .Home-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
 }
-
 .Home-intro {
   font-size: large;
 }
-
 .Home-resources {
   list-style: none;
 }
-
 .Home-resources > li {
   display: inline-block;
   padding: 1rem;
@@ -31,7 +26,6 @@
   grid-template-columns: 200px 1fr;
   grid-gap: 6px;
 }
-
 #profile-form label {
   grid-column: 1/2;
   text-align: right;
@@ -40,7 +34,7 @@
 #profile-form input {
   grid-column: 2/3;
   padding: 10px;
-  border-radius: 0 10px 10px 0;
+  border-radius: 4px;
   border: 1px solid #e6e6e6;
 }
 #profile-form button {
@@ -54,9 +48,10 @@
   cursor: pointer;
 }
 #profile-container {
-  width: 700px;
+  max-width: 800px;
   margin: auto;
   margin-top: 30px;
+  padding: 24px;
 }
 #profile-stats {
   padding-top: 20px;
@@ -72,7 +67,6 @@
   border: 1px solid black;
   text-align: center;
 }
-
 #add-book-form {
   text-align: center;
   margin-top: 20px;
@@ -101,7 +95,6 @@
   margin-top: 14px;
   background-color: white;
 }
-
 @keyframes Home-logo-spin {
   from {
     transform: rotate(0deg);

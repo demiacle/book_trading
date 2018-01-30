@@ -105,7 +105,7 @@ class Profile extends Component {
             </button>
           </form>
           <div id="profile-stats">
-            <p id="books-traded">{profile.booksTraded} books traded</p>
+            <p id="books-traded">{profile.booksTraded} books donated</p>
           </div>
           <h2 id="my-books-title">My Books For Trade</h2>
           <form id="add-book-form" action="/google-books" method="GET">
