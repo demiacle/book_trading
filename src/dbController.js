@@ -102,6 +102,7 @@ function acceptRequest(id, userId) {
       userModel.findOneAndUpdate(
         { _id: userId },
         { $inc: { booksTraded: 1 } },
+        { new: true },
         (err, user) => {
           if (err) {
             console.log(err);
