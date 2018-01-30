@@ -30,8 +30,6 @@
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-gap: 6px;
-  border-bottom: 1px solid #81c784;
-  padding-bottom: 20px;
 }
 
 #profile-form label{
@@ -61,8 +59,40 @@
   margin-top: 30px;
 }
 #profile-stats {
-  padding-left: 126px;
   padding-top: 20px;
+  border-bottom: 1px solid #81c784;
+  padding-bottom: 20px;
+}
+#books-traded {
+  display: block;
+  width: 240px;
+  padding: 4px;
+  border-radius: 30px;
+  margin: auto;
+  border: 1px solid black;
+  text-align: center;
+}
+#add-book-form {
+  text-align: center;
+  margin-top: 20px;
+}
+.my-book {
+  position: relative;
+}
+.my-book button{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 4px;
+  padding: 8px;
+  cursor: pointer;
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+}
+#my-books-title {
+  margin-top: 14px;
+  background-color: white;
 }
 
 @keyframes Home-logo-spin {

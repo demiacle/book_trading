@@ -15,8 +15,6 @@ var userSchema = new mongoose.Schema({
   lastName: String,
   city: String,
   state: String,
-  requestsMade: Number,
-  requestsReceived: Number,
   booksTraded: Number
 })
 

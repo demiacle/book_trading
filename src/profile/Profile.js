@@ -18,6 +18,19 @@ class Profile extends Component {
       }
     })
   }
+  renderBooks() {
+    var books = this.props.userBooks;
+    books = books.map(i => {
+      return <div className='my-book' key={i.title + i.thumbnail}>
+        <img src={i.thumbnail} alt={i.title} />
+        <form action="/remove-book-from-list" method="POST">
+          <input type="hidden" name="id" value={i._id} />
+          <button type="submit">X</button>
+        </form>
+      </div>
+    })
+    return <div className="my-books">{books}</div>
+  }
   render() {
     var profile = this.props.profile;
     return (
@@ -40,19 +53,21 @@ class Profile extends Component {
 
             <label htmlFor="user-name">user name:</label>
             <input id="user-name" name="userName" placeholder={profile.userName}></input>
-            
+
             <label htmlFor="password">password:</label>
             <input id="password" name="password" placeholder="*****"></input>
             <div></div>
             <button id="save-button" type="submit" onClick={this.updateProfile}>Save</button>
           </form>
           <div id="profile-stats">
-          <p id="books-traded">Amount of books traded: {profile.booksTraded}</p>
+            <p id="books-traded">{profile.booksTraded} books traded</p>
           </div>
+          <h2 id="my-books-title">My Books For Trade</h2>
           <form id="add-book-form" action="/google-books" method="GET">
             <input type='text' name="search" placeholder="Search..." required />
-            <button type="submit">Search</button>
+            <button type="submit">Add Book</button>
           </form>
+          {this.renderBooks()}
         </div>
       </div>
     );

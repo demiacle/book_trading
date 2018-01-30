@@ -119,6 +119,7 @@ server
     delete userData._id
     delete userData.__v
     res.locals.serverData.profile = userData
+    res.locals.serverData.userBooks = await dbController.getUserBooks( req.session.user._id )
     next()
   }, renderReactComponent)
   .get('/books-for-trade/search', async (req, res, next) => {
@@ -209,6 +210,10 @@ server
   .post('/add-book-to-list', async (req, res) => {
     console.log('addingbook ' + req.body.title)
     await dbController.addBookToList(req.body.title, req.body.thumbnail, req.session.user._id)
+    res.redirect('/profile')
+  })
+  .post('/remove-book-from-list', async (req, res)=>{
+    await dbController.removeBookFromList( req.body.id )
     res.redirect('/profile')
   })
   .post('/request-trade', (req,res)=>{

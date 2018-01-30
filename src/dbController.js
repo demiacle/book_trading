@@ -21,6 +21,7 @@ function registerUser(userName, password, firstName, lastName, city, state) {
         newUser.lastName = lastName;
         newUser.city = city;
         newUser.state = state;
+        newUser.booksTraded = 0;
         newUser.save((err, final) => {
           if (err) {
             console.log(err)
@@ -125,13 +126,35 @@ function searchBooksForTrade(query) {
   })
 }
 
-function getTotalBooks(){
-  return new Promise((resolve, reject)=>{
-    bookModel.count({}, (err, count)=>{
-      if(err){
+function getTotalBooks() {
+  return new Promise((resolve, reject) => {
+    bookModel.count({}, (err, count) => {
+      if (err) {
         console.log(err)
       }
       resolve(count)
+    })
+  })
+}
+
+function getUserBooks(userId) {
+  return new Promise((resolve, reject) => {
+    bookModel.find({ user: userId }, (err, books) => {
+      if (err) {
+        console.log(err)
+      }
+      resolve(books)
+    })
+  })
+}
+
+function removeBookFromList( id){
+  return new Promise((resolve, reject)=>{
+    bookModel.remove({_id: id}, (err)=>{
+      if(err){
+        console.log(err)
+      }
+      resolve(true)
     })
   })
 }
@@ -145,5 +168,7 @@ export default {
   acceptTrade,
   getBooksForTrade,
   searchBooksForTrade,
-  getTotalBooks
+  getTotalBooks,
+  getUserBooks,
+  removeBookFromList
 }
