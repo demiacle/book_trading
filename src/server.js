@@ -118,9 +118,11 @@ server
       var totalBooks = await dbController.getTotalBooks();
       res.locals.serverData.books = books;
       res.locals.serverData.currentPage = currentPage;
-      res.locals.serverData.requestedBooks = await dbController.getBooksById(
-        req.session.user.requestedBooks
-      );
+      if (req.session.user && req.session.user.requestedBooks) {
+        res.locals.serverData.requestedBooks = await dbController.getBooksById(
+          req.session.user.requestedBooks
+        );
+      }
       // use books.total
       res.locals.serverData.totalPages = Math.ceil(totalBooks / 12);
       res.locals.serverData.isShowingPagination = true;
