@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "start": "razzle start",
+    "dev": "razzle start",
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
-    "start:prod": "node build/server.js",
-    "debug": "razzle start --inspect"
+    "start": "node build/server.js",
+    "debug": "razzle start --inspect",
+    "heroku-postbuild": "razzle build"
   },
   "dependencies": {
     "cookie-session": "^2.0.0-beta.3",
