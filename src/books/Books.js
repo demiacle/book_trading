@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "./Books.css";
 
 class Books extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
   renderPagination() {
     var pagination = [];
     var lowerBound = Math.max(1, this.props.currentPage - 5);
@@ -47,7 +43,6 @@ class Books extends Component {
     return <div id="paginationContainer">{pagination}</div>;
   }
   renderBooks() {
-    console.log(this.props.location);
     var books = this.props.books;
     books = books.map(i => {
       return (

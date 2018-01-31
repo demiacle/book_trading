@@ -8,7 +8,6 @@ import { renderToString } from "react-dom/server";
 import mongoose from "mongoose";
 import dbController from "./dbController.js";
 import googleBooks from "google-books-search";
-console.log(process.env);
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const server = express();
@@ -166,7 +165,6 @@ server
           console.log(err);
           res.send("An error occured");
         } else {
-          console.log(results);
           res.locals.serverData.books = results;
           next();
         }
@@ -262,7 +260,6 @@ server
     }
   })
   .post("/add-book-to-list", async (req, res) => {
-    console.log("addingbook " + req.body.title);
     await dbController.addBookToList(
       req.body.title,
       req.body.thumbnail,

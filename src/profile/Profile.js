@@ -2,22 +2,6 @@ import React, { Component } from "react";
 import "./Profile.css";
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    this.state = {
-      isShowingModal: false
-    };
-  }
-  showModal() {
-    this.setState(prev => {
-      return {
-        isShowingModal: !prev.isShowingModal,
-        field: "test",
-        value: "yip"
-      };
-    });
-  }
   renderBooks() {
     var books = this.props.userBooks;
     books = books.map(i => {
@@ -64,11 +48,6 @@ class Profile extends Component {
       <div>
         <h1>Your Profile</h1>
         <div id="profile-container">
-          {this.state.isShowingModal ? (
-            <EditPromt field={this.state.field} />
-          ) : (
-            ""
-          )}
           <form id="profile-form" method="POST" action="/update-profile">
             <label htmlFor="first-name">First name:</label>
             <input
@@ -114,20 +93,6 @@ class Profile extends Component {
           </form>
           {this.renderBooks()}
         </div>
-      </div>
-    );
-  }
-}
-class EditPromt extends Component {
-  render() {
-    return (
-      <div>
-        <form>
-          <label>
-            {this.props.field}
-            <input type="text" placeholder={this.props.value} />
-          </label>
-        </form>
       </div>
     );
   }

@@ -2,16 +2,7 @@ import React, { Component } from "react";
 import "./Home.css";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    console.log("constructor props are ");
-    console.log(props);
-    this.state = {
-      test: props.test
-    };
-  }
   render() {
-    console.log(this.props);
     return (
       <div className="Home">
         <div id="indexTop">
