@@ -271,7 +271,10 @@ server
     res.redirect("/profile");
   })
   .post("/remove-book-from-list", async (req, res) => {
-    await dbController.removeBookFromList(req.body.id);
+    var updatedUser = await dbController.removeBookFromList(req.body.id);
+    if (updatedUser.id && updatedUser.id === req.session.user._id) {
+      req.session.user = updatedUser;
+    }
     res.redirect("/profile");
   })
   .post("/request-book", requireLoggedIn, async (req, res) => {
@@ -287,7 +290,10 @@ server
         req.session.user._id
       );
     } else {
-      await dbController.denyRequest(id);
+      var updatedUser = await dbController.denyRequest(id);
+      if (updatedUser.id === req.session.user._id) {
+        req.session.user = updatedUser;
+      }
     }
     res.redirect("/profile");
   });

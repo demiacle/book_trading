@@ -103,7 +103,7 @@ function acceptRequest(id, userId) {
       }
       userModel.findOneAndUpdate(
         { _id: userId },
-        { $inc: { booksTraded: 1 } },
+        { $inc: { booksTraded: 1 }, $pullAll: { requestedBooks: [id] } },
         { new: true },
         (err, user) => {
           if (err) {
@@ -117,16 +117,25 @@ function acceptRequest(id, userId) {
 }
 function denyRequest(id) {
   return new Promise((resolve, reject) => {
-    bookModel.findOneAndUpdate(
-      { _id: id },
-      { $unset: { requestedByUser: 1 } },
-      err => {
+    bookModel
+      .findOneAndUpdate({ _id: id }, { $unset: { requestedByUser: 1 } })
+      .populate("requestedByUser")
+      .exec((err, book) => {
         if (err) {
           console.log(err);
         }
-        resolve(true);
-      }
-    );
+        userModel.findOneAndUpdate(
+          { _id: book.requestedByUser },
+          { $pullAll: { requestedBooks: [id] } },
+          { new: true },
+          (err, user) => {
+            if (err) {
+              console.log(err);
+            }
+            resolve(user);
+          }
+        );
+      });
   });
 }
 function getBooksForTrade(currentPage) {
@@ -211,12 +220,28 @@ function getUserBooks(userId) {
 }
 function removeBookFromList(id) {
   return new Promise((resolve, reject) => {
-    bookModel.remove({ _id: id }, err => {
-      if (err) {
-        console.log(err);
-      }
-      resolve(true);
-    });
+    bookModel
+      .findOneAndRemove({ _id: id })
+      .populate("requestedByUser")
+      .exec((err, book) => {
+        if (err) {
+          console.log(err);
+        }
+        if (book.requestedByUser) {
+          userModel.findOneAndUpdate(
+            { _id: book.requestedByUser.id },
+            { $pullAll: { requestedBooks: [id] } },
+            (err, user) => {
+              if (err) {
+                console.log(err);
+              }
+              resolve(user);
+            }
+          );
+        } else {
+          resolve(true);
+        }
+      });
   });
 }
 export default {
