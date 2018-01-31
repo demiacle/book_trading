@@ -86,11 +86,15 @@ class Books extends Component {
   render() {
     return (
       <div className="Books">
-        <h1>Books&middot;Available&middot;For&middot;Trade</h1>
+        {this.props.location ? (
+          <h1>Add&middot;Your&middot;Books</h1>
+        ) : (
+          <h1>Available&middot;Books</h1>
+        )}
         {this.props.isLoggedIn &&
           !this.props.location &&
           this.renderTradeStatus()}
-        {this.props.query && <h1>Search for {this.props.query}</h1>}
+        {this.props.query && <h1>Search: {this.props.query}</h1>}
         {this.props.isShowingPagination && this.renderPagination()}
         {this.props.books.length === 0 && (
           <p className="no-books-found">No books found</p>

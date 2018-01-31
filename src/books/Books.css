@@ -51,7 +51,7 @@
 }
 #book-grid {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 324px 324px 324px;
   margin: auto;
   grid-gap: 10px;
@@ -80,17 +80,19 @@
   font-size: 14pt;
   padding: 2px;
 }
-/* THESE SLOW DOWN THINGS WHY
+#paginationContainer {
+  text-align: center;
+  padding: 12px;
+}
 @media (max-width: 860px) {
   #book-grid {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 33% 33% 33%;
     grid-template-rows: 324px 324px 324px 324px;
   }
 }
 @media (max-width: 660px) {
   #book-grid {
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 324px 324px 324px 324px 324px 324px;
   }
 }
-*/

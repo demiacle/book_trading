@@ -71,10 +71,46 @@
   text-align: center;
   margin-top: 20px;
 }
+#add-book-form input {
+  padding: 5px;
+  padding-right: 60px;
+  border-radius: 20px 0 0 20px;
+  border: 1px solid #c8c8c8;
+}
+#add-book-form button {
+  padding: 6px;
+  padding-right: 14px;
+  border: none;
+  cursor: pointer;
+  background-color: #5bc5e8;
+  border-radius: 0 20px 20px 0;
+}
+#add-book-form button:hover {
+  background-color: #21b6e6;
+}
+.my-books {
+  flex-wrap: wrap;
+  display: flex;
+  max-width: 732px;
+  min-width: 200px;
+  margin: auto;
+  margin-top: 20px;
+}
 .my-book {
   position: relative;
-  border: 1px solid black;
+  text-align: left;
+  border: 1px solid #b8b8b8;
   display: inline-block;
+  width: 144px;
+  height: 266px;
+  vertical-align: text-top;
+}
+.my-book img {
+  border: 1px solid #b8b8b8;
+  margin: auto;
+  width: 130px;
+  display: block;
+  margin: 4px;
 }
 #remove-form button {
   position: absolute;
@@ -89,17 +125,40 @@
 }
 #request-form button {
   display: block;
+  width: 98%;
+  background-color: #5bc5e8;
+  margin: auto;
+  padding: 6px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 1px;
+}
+#request-form button:hover {
+  background-color: #21b6e6;
+}
+#request-form button:last-child {
+  background-color: #f44336;
+}
+#request-form button:last-child:hover {
+  background-color: red;
+}
+#request-form button:disabled,
+#request-form button:disabled:hover {
+  background-color: #e5e5e5;
+  color: #ffffff;
+}
+#request-form {
+  position: absolute;
+  bottom: 0;
   width: 100%;
 }
 #my-books-title {
   margin-top: 14px;
   background-color: white;
 }
-@keyframes Home-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 634px) {
+  .my-books {
+    width: 440px;
   }
 }

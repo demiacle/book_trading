@@ -25,8 +25,11 @@ class Home extends Component {
               @Demiacle
             </a>{" "}
             using <a href="https://reactjs.org/">React</a>,{" "}
-            <a href="https://github.com/jaredpalmer/razzle">Razzle</a>, and{" "}
-            <a href="https://github.com/expressjs/express">Express</a>
+            <a href="https://github.com/jaredpalmer/razzle">Razzle</a>,{" "}
+            <a href="https://github.com/smilledge/node-google-books-search">
+              Google-Books-Search
+            </a>{" "}
+            and <a href="https://github.com/expressjs/express">Express</a>
           </p>
         </div>
         {this.props.isLoggedIn ? (

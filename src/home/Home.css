@@ -21,11 +21,9 @@
   display: inline-block;
   padding: 1rem;
 }
-@keyframes Home-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-message {
+  width: 80%;
+  border-bottom: 1px solid #81c784;
+  margin: auto;
+  margin-top: 20px;
 }
