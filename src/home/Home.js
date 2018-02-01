@@ -12,7 +12,7 @@ class Home extends Component {
             <img id="tree" src="trees_cm-.png" alt="site icon" />
           </div>
           <p id="builtBy">
-            Built by Daniel Escobedo:<a href="https://twitter.com/Demiacle?lang=en">
+            Built by <a href="https://demiacle.github.io/">Daniel Escobedo</a>:<a href="https://twitter.com/Demiacle?lang=en">
               @Demiacle
             </a>{" "}
             using <a href="https://reactjs.org/">React</a>,{" "}
